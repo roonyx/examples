@@ -1,0 +1,265 @@
+<%= render "shared/header" %>
+
+<div class="container page-wrapper">
+  <% if @has_error %>
+    <div class="alert error-alert" role="alert">
+      Please, fix the errors in red
+    </div>
+  <% end %>
+  <div class="alert alert-secondary" role="alert">
+    <h4>Quick Quote -  Jewellery, Artwork, Valuables, Collections</h4>
+    <p>
+      This page allows you to quickly request an indication from us.
+    </p>
+  </div>
+
+  <section class="content">
+    <%= form_for(@quote_jewellery, data: { disabled: local_assigns[:disabled] }) do |f| %>
+      <div class="section-conteiner">
+        <div class="form-group" id="insured-conteiner">
+          <%= f.fields_for :insured, f.object.insured || f.object.build_insured do |insured_fields| %>
+            <div class="item-row">
+              <div>
+                <label for="insured-search">Existing Insured?</label>
+                <div class="input-group default-size">
+                  <%= insured_fields.text_field(:name,
+                                   id: "insured-search",
+                                   type: "text",
+                                   autocomplete: "off",
+                                   class: "form-control border-right-0 border",
+                                   placeholder: "Type Insured's name...") %>
+                  <%= f.hidden_field :insured_id, id: "insured-id" %>
+                  <span class="input-group-append">
+                    <div class="input-group-text bg-transparent">
+                      <i class="material-icons md-18">search</i>
+                    </div>
+                  </span>
+                  <div class="insured-drop-menu">
+                    <ul class="insureds-list" id="insureds-list">
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% name_error = @quote_jewellery.errors && @quote_jewellery.errors.messages[:'insured.name'].present? %>
+
+
+            <div class="new-client-conteiner">
+              <div class="item-row">
+                <div class="has-error">
+                  <label for="insured-name" class=<%="text-danger" if name_error%>>
+                    Proposed Insured Name
+                  </label>
+                  <div class="input-group full-size">
+                    <%= insured_fields.text_field(:name,
+                                                  id: "insured-name",
+                                                  type: "text",
+                                                  class: "form-control #{'is-invalid' if name_error}",
+                                                  placeholder: "Enter Proposed Insured Name") %>
+                  </div>
+                </div>
+              </div>
+              <% inception_date_error = @quote_jewellery.errors && @quote_jewellery.errors.messages[:'insured.inception_date'].present? %>
+              <div class="item-row">
+                <div>
+                  <label for="inception-picker" class=<%="text-danger" if inception_date_error%>>
+                    Inception Date
+                  </label>
+                  <div class="input-group default-size">
+                    <%= insured_fields.text_field(:inception_date,
+                                                  value: "#{f.object.insured.inception_date.strftime("%d/%m/%Y") if f.object.insured.inception_date.present? }",
+                                                  autocomplete: "off",
+                                                  id: "inception-picker",
+                                                  class: "datepicker-here form-control border-right-0 border #{'border-danger is-invalid' if inception_date_error}",
+                                                  'data-position': "right top") %>
+                    <span class="input-group-append datepicker-append">
+                      <div class="input-group-text bg-transparent <%="#{'is-invalid' if inception_date_error}"%>">
+                        <i class="material-icons md-18">date_range</i>
+                      </div>
+                    </span>
+                    <% f.object.insured.errors.messages[:'inception_date'].each do |msg| %>
+                      <span class="text-danger"><%= msg %></span>
+                    <% end %>
+                  </div>
+                </div>
+                <% expiry_date_error = @quote_jewellery.errors && @quote_jewellery.errors.messages[:'insured.expiry_date'].present? %>
+                <div>
+                  <label for="expiry-picker" class=<%="text-danger" if expiry_date_error%>>
+                    Expiry Date
+                  </label>
+                  <div class="input-group default-size">
+                    <%= insured_fields.text_field(:expiry_date,
+                                                  value: "#{f.object.insured.expiry_date.strftime("%d/%m/%Y") if f.object.insured.expiry_date.present? }",
+                                                  autocomplete: "off",
+                                                  id: "expiry-picker",
+                                                  class: "datepicker-here form-control border-right-0 border #{'border-danger is-invalid' if expiry_date_error}",
+                                                  'data-position': "right top") %>
+                    <span class="input-group-append datepicker-append">
+                      <div class="input-group-text bg-transparent <%="#{'is-invalid' if expiry_date_error}"%>">
+                        <i class="material-icons md-18">date_range</i>
+                      </div>
+                    </span>
+                    <% f.object.insured.errors.messages[:'expiry_date'].each do |msg| %>
+                      <span class="text-danger"><%= msg %></span>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="item-row">
+                <div>
+                  <label>Situation Address</label>
+                  <div class="input-group full-size">
+                    <%= insured_fields.text_field(:address,
+                                                  id: 'insured-address',
+                                                  class: "form-control border") %>
+                  </div>
+                </div>
+              </div>
+              <div class="item-row">
+                <% insured_postcode_error = f.object.errors && f.object.errors.messages[:'insured.postcode'].present? %>
+                <div>
+                  <label for="insured-postcode" class=<%="text-danger" if insured_postcode_error%>>
+                    Postcode
+                  </label>
+                  <div class="input-group">
+                    <%= insured_fields.text_field(:postcode,
+                                                  id: 'insured-postcode',
+                                                  class: "form-control #{'is-invalid' if insured_postcode_error}") %>
+                  </div>
+                  <% f.object.errors.messages[:'insured.postcode'].each do |msg| %>
+                    <span class="text-danger"><%= msg %></span>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+
+      <%= f.fields_for :cover_jewellery, f.object.cover_jewellery || f.object.build_cover_jewellery do |cover_jewellery_fields| %>
+      <nav class="nav-section multiline">
+        <div class="form-check">
+          <label class="form-check-label">
+            <%= cover_jewellery_fields.check_box :_destroy,
+                                                 { checked: cover_jewellery_fields.object.persisted? || params['quote_jewellery'] && params['quote_jewellery']['cover_jewellery_attributes'].present?,
+                                                   class: "form-check-input cover-jewellery-check" },
+                                                 false,
+                                                 true %>
+            <div class="check-caption">
+              <h1>
+                JEWELLERY & VALUABLES (Please check box if you want to include
+                this cover in your Quick Quote)
+              </h1>
+              <span>
+                Jewellery, Watches, Coins, Banknotes, Currency, Bullion and
+                Precious Metals, Diamonds and Precious Stones and other Valuables
+              </span>
+            </div>
+          </label>
+        </div>
+      </nav>
+      <div class="section-conteiner">
+        <div class="form-group">
+          <div class="item-row">
+            <div>
+              <% cover_jewellery_total_sum_insured_error = f.object.errors && f.object.errors.messages[:'cover_jewellery.total_sum_insured'].present? %>
+              <label for="formGroupExampleInput" class=<%="text-danger" if cover_jewellery_total_sum_insured_error%>>Total Sum Insured</label>
+              <div class="input-group default-size">
+                <%= cover_jewellery_fields.text_field(:total_sum_insured,
+                                                      class: "form-control cover-jewellery-field currency #{'is-invalid' if cover_jewellery_total_sum_insured_error }",
+                                                      placeholder: "Max $250,000 AUD") %>
+
+              </div>
+              <% f.object.errors.messages[:'cover_jewellery.total_sum_insured'].each do |msg| %>
+                 <div class="text-danger"><%= msg %></div>
+              <% end %>
+            </div>
+            <div>
+              <% cover_jewellery_maximum_amount_worn_error = f.object.errors && f.object.errors.messages[:'cover_jewellery.maximum_amount_worn'].present? %>
+              <label for="formGroupExampleInput" class=<%="text-danger" if cover_jewellery_maximum_amount_worn_error%>>Maximum amount worn at any one time</label>
+              <div class="input-group default-size">
+                <%= cover_jewellery_fields.text_field(:maximum_amount_worn,
+                                                      class: "form-control cover-jewellery-field currency #{'is-invalid' if cover_jewellery_maximum_amount_worn_error }",
+                                                      placeholder: "Max $250,000 AUD") %>
+              </div>
+              <% f.object.errors.messages[:'cover_jewellery.maximum_amount_worn'].each do |msg| %>
+                 <div class="text-danger"><%= msg %></div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+
+      <%= f.fields_for :cover_artwork, f.object.cover_artwork || f.object.build_cover_artwork do |cover_artwork_fields| %>
+      <nav class="nav-section multiline">
+        <div class="form-check">
+          <label class="form-check-label">
+          <%= cover_artwork_fields.check_box :_destroy,
+                                             { checked: cover_artwork_fields.object.persisted? || params['quote_jewellery'] && params['quote_jewellery']['cover_artwork_attributes'].present?,
+                                               class: "form-check-input cover-artwork-check"},
+                                               false,
+                                               true %>
+            <div class="check-caption">
+              <h1>
+                ARTWORK & COLLECTABLES (Please check box if you want to
+                include this cover in your Quick Quote)
+              </h1>
+              <span>
+                Fine Arts and Objets d’Art, Silverware, Tableware, Glassware,
+                Sculpture, Furniture, Books, Stamps, Antiques and Collectibles
+              </span>
+            </div>
+          </label>
+        </div>
+      </nav>
+      <div class="section-conteiner">
+        <div class="form-group">
+          <div class="item-row">
+            <div>
+              <% cover_artwork_total_sum_paintings_error = f.object.errors && f.object.errors.messages[:'cover_artwork.total_sum_paintings'].present? %>
+              <label class=<%="text-danger" if cover_artwork_total_sum_paintings_error %>>Total Sum Insured</label>
+              <div class="input-group default-size">
+                <%= cover_artwork_fields.text_field(:total_sum_paintings,
+                                                    class: "form-control cover-artwork-field currency #{'is-invalid' if cover_artwork_total_sum_paintings_error }",
+                                                    placeholder: "Paintings and Non-Fragile") %>
+              </div>
+              <% f.object.errors.messages[:'cover_artwork.total_sum_paintings'].each do |msg| %>
+                 <div class="text-danger"><%= msg %></div>
+              <% end %>
+            </div>
+            <div>
+              <% cover_artwork_total_sum_glass_error = f.object.errors && f.object.errors.messages[:'cover_artwork.total_sum_glass'].present? %>
+              <label class=<%="text-danger" if cover_artwork_total_sum_glass_error %>>Total Sum Insured</label>
+              <div class="input-group default-size">
+                <%= cover_artwork_fields.text_field(:total_sum_glass,
+                                                    class: "form-control cover-artwork-field currency #{'is-invalid' if cover_artwork_total_sum_glass_error }",
+                                                    placeholder: "Glass and Fragiles") %>
+              </div>
+              <% f.object.errors.messages[:'cover_artwork.total_sum_glass'].each do |msg| %>
+                 <div class="text-danger"><%= msg %></div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <div class="section-conteiner action-group">
+        <div class="remove-btn-conteiner">
+          <% if @quote_jewellery.new_record? %>
+            <%= link_to "Delete", root_path, id: "news", class: "btn btn-danger" %>
+          <% else %>
+            <%= link_to "Delete", quote_jewellery_path, method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure?"}  %>
+          <% end %>
+        </div>
+        <div class="right-action-group">
+          <%= submit_tag("View Premium", class: "btn btn-success hidden", value: "View Premium", name: "redirect") %>
+          <%= submit_tag("Save Draft", class: "btn btn-default") %>
+          <%= submit_tag("View Premium", class: "btn btn-success", value: "View Premium", name: "redirect") %>
+        </div>
+      </div>
+    <% end %>
+  </section>
+</div>
