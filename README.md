@@ -7,7 +7,7 @@ web pages — every time a web page does more than just sit there and display st
 for you to look at — displaying timely content updates, interactive maps, animated 2D/3D graphics,
 scrolling video jukeboxes, etc. — you can bet that JavaScript is probably involved.
 
-[Code Examples using Javascript](/javascript/README.md)
+[Code Examples using Javascript](/javascript)
 
 ## Ruby on Rails
 
@@ -19,4 +19,4 @@ In addition to MVC, Rails emphasizes the use of other well-known software engine
 and paradigms, including convention over configuration (CoC), don't repeat yourself (DRY), and
 the active record pattern.
 
-[Code Examples using Ruby On Rails](/rails/README.md)
+[Code Examples using Ruby On Rails](/rails)
