@@ -1,12 +1,12 @@
+## Demo
+
+Try the [live demo](http://roonyx.tech/).
+
 ## Technologies used in project
 
 - [React](https://reactjs.org/) 
 - [Node.js](https://nodejs.org/en/)
 - [Next.js](https://nextjs.org/)
-
-## Demo
-
-Try the [live demo](http://roonyx.tech/).
 
 ## Dependencies
 
