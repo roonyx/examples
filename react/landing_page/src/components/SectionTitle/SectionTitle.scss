@@ -1,0 +1,52 @@
+@import '../../../static/styles/variables';
+
+.sectionTitle {
+  display: none;
+  padding: 0 $side-step;
+
+  @include media-portrait($size-port-ex-large) {
+    height: $section-title-height;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+
+  @include media-portrait($size-port-medium) {
+    padding-left: $side-step-small;
+    padding-right: $side-step-small;
+    height: $section-title-height-small;
+  }
+
+  .btn {
+    background-color: transparent;
+    border: none;
+    padding-bottom: 3px;
+
+    &:focus, &:active {
+      outline: none;
+    }
+  }
+
+  img {
+    padding-right: 12px;
+    padding-bottom: 1px;
+  }
+
+  h1 {
+    color: $c-text;
+    text-transform: uppercase;
+    font-size: 20px;
+
+    &.black {
+      color: #000;
+    }
+
+    @include media-portrait($size-port-medium) {
+      font-size: 14px;
+    }
+
+    @include media-portrait($size-port-ex-small) {
+      font-size: 12px;
+    }
+  }
+}

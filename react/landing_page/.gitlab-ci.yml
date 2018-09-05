@@ -1,0 +1,63 @@
+image: node:10.9-alpine
+
+stages:
+  - build
+  - lints
+  - deploy
+
+before_script:
+  - apk add yarn
+  - yarn install --frozen-lockfile
+
+build:
+  stage: build
+  script:
+    - yarn build
+
+eslint:
+  stage: lints
+  script:
+    - yarn lint
+
+scsslint:
+  stage: lints
+  script:
+    - yarn scss-lint
+
+deploy_staging:
+  stage: deploy
+  only:
+    - staging
+  environment:
+      name: staging
+      url: http://landing.testcake.ru
+  before_script:
+    - 'which ssh-agent || ( apk add openssh-client )'
+    - eval $(ssh-agent -s)
+    - echo "$TESTCAKE_PRIVATE_SSH_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - yarn global add pm2
+    - apk add bash
+  script:
+    - pm2 deploy staging update --force
+
+deploy_production:
+  stage: deploy
+  only:
+    - master
+  environment:
+      name: production
+      url: https://roonyx.tech
+  before_script:
+    - 'which ssh-agent || ( apk add openssh-client )'
+    - eval $(ssh-agent -s)
+    - echo "$PRODUCTION_PRIVATE_SSH_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - yarn global add pm2
+    - apk add bash
+  script:
+    - pm2 deploy production update --force

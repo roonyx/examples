@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'Formular';
+  font-weight: normal;
+  font-style: normal;
+  src: url(../fonts/formular/formular.woff2) format('woff2'),
+       url(../fonts/formular/formular.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Formular';
+  font-weight: 700;
+  font-style: normal;
+  src: url(../fonts/formular/formular-700.woff2) format('woff2'),
+       url(../fonts/formular/formular-700.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Formular';
+  font-weight: 900;
+  font-style: normal;
+  src: url(../fonts/formular/formular-900.woff2) format('woff2'),
+       url(../fonts/formular/formular-900.woff) format('woff');
+}

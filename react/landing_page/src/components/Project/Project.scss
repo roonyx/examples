@@ -1,0 +1,453 @@
+@import '../../../static/styles/variables';
+
+$bottom-height: 50px;
+$bottom-media-height: 150px;
+$bottom-media-height-small: 100px;
+$bottom-media-height-ex-small: 80px;
+$bottom-step: 75px;
+$bottom-step-small: 35px;
+$left-step: 10.4%;
+$title-height: 20%;
+$title-height-small: 10%;
+
+.classToRename {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-end;
+  padding-bottom: 6px;
+}
+
+.projectBlock {
+  @include full-window();
+  color: $c-text-dark;
+
+  @include media-portrait($size-port-ex-large) {
+    padding-left: $side-step;
+    padding-right: $side-step;
+    height: calc(100% - #{$section-title-height});
+  }
+
+  @include media-portrait($size-port-medium) {
+    padding-left: $side-step-small;
+    padding-right: $side-step-small;
+    height: calc(100% - #{$section-title-height-small});
+  }
+
+  .mediaTitle {
+    display: none;
+
+    @include media-portrait($size-port-ex-large) {
+      height: $title-height;
+      display: flex;
+      align-items: center;
+
+      @include media-portrait($size-port-medium) {
+        height: $title-height-small;
+      }
+    }
+
+    .title {
+      @include only-tablet() {
+        font-size: 62px;
+        line-height: 70px;
+        width: 90%;
+      }
+
+      @include media-portrait($size-port-medium) {
+        font-size: 20px;
+        line-height: 20px;
+        width: 100%;
+      }
+
+      @include media-portrait($size-port-ex-small) {
+        font-size: 17px;
+        line-height: 17px;
+      }
+    }
+  }
+
+  .wrapper {
+    width: 100%;
+    height: 70%;
+    // padding-bottom: $bottom-step;
+    display: flex;
+
+    @include media-portrait($size-port-ex-large) {
+      height: calc(100% - #{$title-height});
+      padding-top: 10px;
+    }
+
+    @include media-portrait($size-port-medium) {
+      height: calc(100% - #{$title-height-small});
+      padding-top: 0;
+    }
+
+    @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+      padding-top: 10px;
+    }
+
+    .left, .right {
+      display: flex;
+      flex-flow: column;
+
+      .bot {
+        flex: 0 0 $bottom-height;
+        display: flex;
+        align-items: center;
+
+        [alt="icon"] {
+          cursor: pointer;
+          max-width: 20vw;
+          max-height: 20vh;
+        }
+      }
+    }
+
+    .left {
+      flex: 0 0 60%;
+      padding-left: $left-step;
+      justify-content: flex-end;
+
+      @include media-portrait($size-port-ex-large) {
+        flex: 0 0 35%;
+        padding-left: 0;
+      }
+
+      @include media-portrait($size-port-ex-small) {
+        width: 45%;
+      }
+
+      @include media-landscape-phones($size-mob-land-width-small, $size-mob-land-height-small) {
+        flex: 0 0 50%;
+      }
+
+      .top {
+        flex: 0 0 50%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding-left: 50%;
+        margin-bottom: auto;
+
+        @include media-portrait($size-port-ex-large) {
+          flex: 0 0 100%;
+          padding: 0;
+        }
+
+        .list {
+          @include only-full-hd() {
+            font-size: calcSize(18);
+          }
+
+          @include media-portrait($size-port-ex-large) {
+            font-size: 18px;
+          }
+
+          @include media-portrait($size-port-medium) {
+            font-size: 14px;
+          }
+
+          @include media-portrait($size-port-ex-small) {
+            font-size: 11px;
+            padding-top: 0;
+          }
+
+          @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+            font-size: 12px;
+            padding-top: 5px;
+          }
+
+          @include media-landscape-phones($size-mob-land-width-small, $size-mob-land-height-small) {
+            font-size: 10px;
+          }
+
+          li {
+            padding-bottom: 10px;
+
+            @include media-portrait($size-port-ex-small) {
+              padding-bottom: 5px;
+            }
+
+            @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+              padding-bottom: 5px;
+            }
+
+            @include media-landscape-phones($size-mob-land-width-small, $size-mob-land-height-small) {
+              padding-bottom: 3px;
+            }
+          }
+        }
+      }
+
+      .textTransition {
+        animation: textTitleTransition .45s linear .1s;
+      }
+
+      .mid {
+        @include media-portrait($size-port-ex-large) {
+          display: none;
+        }
+
+        @include media-landscape-phones($size-mob-land-width-small, $size-mob-land-height-small) {
+          display: flex;
+          align-items: center;
+        }
+
+        .title {
+          font-size: 70px;
+          line-height: 78px;
+
+          @include only-full-hd() {
+            font-size: calcSize(110);
+            line-height: calcSize(110);
+          }
+
+          @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+            font-size: 40px;
+            line-height: 46px;
+          }
+        }
+      }
+
+      .bot {
+        justify-content: space-between;
+
+        @include media-portrait($size-port-ex-large) {
+          display: none;
+        }
+
+        @include media-landscape-phones($size-mob-land-width-small, $size-mob-land-height-small) {
+          > img {
+            display: none;
+          }
+
+          > span {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+          }
+        }
+
+        .arrowWrapper {
+          display: block;
+          height: 100%;
+        }
+      }
+    }
+
+    .right {
+      flex: 0 0 40%;
+      padding-left: 100px;
+      padding-right: 110px;
+
+      @include media-portrait($size-port-ex-large) {
+        flex: 0 0 65%;
+        padding: 0 20px;
+      }
+
+      @include media-portrait($size-port-medium) {
+        padding: 0 0 0 10px;
+      }
+
+      @include media-portrait($size-port-ex-small) {
+        width: 55%;
+      }
+
+      @include media-landscape($size-land-large) {
+        padding-left: 50px;
+        padding-right: 60px;
+      }
+
+      @include media-landscape-phones($size-mob-land-width-small, $size-mob-land-height-small) {
+        flex: 0 0 50%;
+      }
+
+      .top {
+        display: flex;
+
+        @include media-portrait($size-port-ex-large) {
+          flex: 0 0 calc(100% - #{$bottom-media-height});
+          align-items: flex-start;
+        }
+
+        @include media-portrait($size-port-medium) {
+          flex: 0 0 calc(100% - #{$bottom-media-height-small});
+        }
+
+        @include media-portrait($size-port-ex-small) {
+          flex: 0 0 calc(100% - #{$bottom-media-height-ex-small});
+        }
+
+        @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+          align-items: flex-start;
+        }
+
+        .description {
+          line-height: 24px;
+
+          @include only-full-hd() {
+            line-height: calcSize(30);
+            font-size: calcSize(18);
+          }
+
+          @include media-portrait($size-port-ex-large) {
+            font-size: 22px;
+            line-height: 36px;
+            letter-spacing: 1px;
+          }
+
+          @include media-portrait($size-port-large) {
+            line-height: 28px;
+          }
+
+          @include media-portrait($size-port-medium) {
+            font-size: 14px;
+            line-height: 16px;
+            letter-spacing: 0px;
+          }
+
+          @include media-portrait($size-port-small) {
+            font-size: 12px;
+            line-height: 13px;
+          }
+
+          @include media-portrait($size-port-ex-small) {
+            font-size: 11px;
+            line-height: 12px;
+          }
+
+          @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+            font-size: 12px;
+            line-height: 13px;
+          }
+
+          @include media-landscape-phones($size-mob-land-width-small, $size-mob-land-height-small) {
+            font-size: 12px;
+            line-height: 12px;
+          }
+        }
+      }
+
+      .bot {
+        @include media-portrait($size-port-ex-large) {
+          flex: 0 0 $bottom-media-height;
+          flex-flow: column;
+          align-items: flex-start;
+          justify-content: space-between;
+        }
+
+        @include media-portrait($size-port-medium) {
+          display: flex;
+          flex: 0 0 $bottom-media-height-small;
+        }
+
+        @include media-portrait($size-port-ex-small) {
+          display: flex;
+          flex: 0 0 $bottom-media-height-ex-small;
+        }
+
+        .mediaArrows {
+          display: none;
+
+          @include media-portrait($size-port-ex-large) {
+            width: 100%;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+          }
+
+          @include media-portrait($size-port-medium) {
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.mediaButton {
+  @include media-portrait($size-port-medium) {
+    font-size: 12px;
+    padding: 5px 10px;
+    width: 100%;
+  }
+
+  @include media-portrait($size-port-ex-small) {
+    font-size: 10px;
+    height: 40px;
+    width: 100%;
+  }
+
+  @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+    width: 100%;
+    padding: 5px 20px;
+    font-size: 12px;
+  }
+}
+
+.hiddenArrow {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.arrowButtons {
+  height: 100%;
+  padding: 0 25px;
+
+  @include media-portrait($size-port-ex-large) {
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
+
+@keyframes textTitleTransition {
+  from { transform: translateX(300px) }
+  to { transform: translateX(0px) }
+}
+
+.bottomRow {
+  width: 100%;
+  padding-top: 3%;
+}
+
+.bottomWrapper {
+  padding-left: 10.5%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8.3%;
+
+  @include only-full-hd() {
+    padding-right: 16.3%;
+  }
+
+  .mediaButtonWrapper {
+    padding-left: 100px;
+    padding-right: 110px;
+  }
+
+  img {
+    margin-right: auto;
+  }
+
+  .logo {
+    filter: grayscale(100%);
+  }
+}
+
+.fakeSubTitle {
+  font-size: 70px;
+  line-height: 78px;
+  user-select: none;
+  color: $c-bg-light;
+}
+
+.subTitle {
+  font-size: 70px;
+  line-height: 78px;
+}

@@ -1,0 +1,195 @@
+@import '../../../static/styles/variables';
+
+$margin-medium: 20px;
+$margin-small: 10px;
+$margin-ex-small: 5px;
+
+.wrapper {
+  @include full-window();
+
+  .form {
+    width: 100%;
+
+    .inputsWrapper {
+      width: 100%;
+      padding-bottom: 55px;
+
+      @include only-full-hd() {
+        padding-bottom: calcSize(110);
+      }
+
+      @include media-portrait($size-port-medium) {
+        padding-bottom: 10px
+      }
+
+      @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+        padding-bottom: 20px;
+      }
+
+      @include media-landscape-phones($size-mob-land-width-small, $size-mob-land-height-small) {
+        padding-bottom: 5px;
+      }
+
+      input {
+        margin-bottom: $margin-medium;
+
+        @include only-full-hd() {
+          margin-bottom: 20px;
+          padding: 20px 10px;
+          font-size: calcSize(21);
+        }
+
+        @include media-portrait($size-port-medium) {
+          margin-bottom: $margin-small;
+          padding: 5px;
+          font-size: 14px;
+        }
+
+        @include media-portrait($size-port-small) {
+          font-size: 12px;
+        }
+
+        @include media-portrait($size-port-ex-small) {
+          margin-bottom: $margin-ex-small;
+        }
+
+        @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+          margin-bottom: $margin-small;
+          padding: 5px;
+        }
+
+        @include media-landscape-phones($size-mob-land-width-small, $size-mob-land-height-small) {
+          margin-bottom: $margin-ex-small;
+          padding: 3px;
+          font-size: 13px;
+        }
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .text-input {
+        background-color: #000;
+        border: none;
+        border-radius: 0;
+        border-bottom: 2px solid white;
+        color: white;
+        max-width: 100%;
+        width: 100%;
+        resize: none;
+        padding: 10px;
+        font-size: 16px;
+
+        @include only-full-hd() {
+          height: auto;
+          font-size: calcSize(21);
+          padding: 20px 10px;
+        }
+
+        &:focus {
+          outline: none;
+
+          &::placeholder {
+            color: rgb(70, 70, 70);
+          }
+        }
+
+        &::placeholder {
+          color: $c-text;
+          letter-spacing: 1px;
+        }
+
+        @include media-portrait($size-port-medium) {
+          margin-bottom: $margin-small;
+          padding: 5px;
+          font-size: 14px;
+          height: 30px;
+        }
+
+        @include media-portrait($size-port-small) {
+          font-size: 12px;
+        }
+
+        @include media-portrait($size-port-ex-small) {
+          margin-bottom: $margin-ex-small;
+        }
+
+        @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+          margin-bottom: $margin-small;
+          padding: 5px;
+        }
+
+        @include media-landscape-phones($size-mob-land-width-small, $size-mob-land-height-small) {
+          margin-bottom: $margin-ex-small;
+          padding: 3px;
+          font-size: 13px;
+        }
+      }
+    }
+
+  }
+
+  .message {
+    color: $c-text;
+    margin: $margin-medium 0;
+    font-size: 17px;
+
+    .activeMessage {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    @include only-full-hd() {
+      font-size: calcSize(18);
+    }
+
+    @include media-portrait($size-port-ex-small) {
+      margin: $margin-ex-small 0;
+      font-size: 80%;
+    }
+
+    @include media-portrait($size-port-medium) {
+      margin: $margin-small 0;
+    }
+
+    @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+      margin: $margin-small 0;
+    }
+
+    @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+      margin: $margin-small 0;
+    }
+
+    @include media-landscape-phones($size-mob-land-width-small, $size-mob-land-height-small) {
+      margin: $margin-ex-small 0;
+      font-size: 80%;
+    }
+  }
+}
+
+.btn {
+  padding-left: 60px;
+  padding-right: 60px;
+
+  @include only-full-hd() {
+    font-size: calcSize(18);
+  }
+
+  @include media-portrait($size-port-small) {
+    padding: 5px 35px;
+    height: 40px;
+  }
+
+  @include media-portrait($size-port-ex-small) {
+    padding: 0 25px;
+    height: 30px;
+    font-size: 80%;
+  }
+
+  @include media-landscape-phones($size-mob-land-width-small, $size-mob-land-height-small) {
+    padding: 0 25px;
+    height: 30px;
+    font-size: 80%;
+  }
+}

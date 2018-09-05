@@ -1,0 +1,63 @@
+{
+  "name": "@roonyx-tech/landing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "rm -rf .next && nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ./src ./pages",
+    "scss-lint": "sass-lint -c '.scss-lint.yml' -v -q",
+    "build": "next build",
+    "start": "NODE_ENV=production node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roonyx/landing.git"
+  },
+  "keywords": [],
+  "author": "Roonyx team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roonyx/landing/issues"
+  },
+  "homepage": "https://github.com/roonyx/landing#readme",
+  "dependencies": {
+    "@zeit/next-sass": "^0.2.0",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "i18next": "^11.3.2",
+    "i18next-express-middleware": "1.0.10",
+    "i18next-node-fs-backend": "1.0.0",
+    "i18next-xhr-backend": "1.5.1",
+    "intersection-observer": "^0.5.0",
+    "next": "^6.0.3",
+    "node-sass": "^4.9.0",
+    "nodemailer": "^4.6.7",
+    "prop-types": "^15.6.1",
+    "react": "^16.4.0",
+    "react-autosize-textarea": "^4.0.0",
+    "react-device-detect": "^1.5.8",
+    "react-dom": "^16.4.0",
+    "react-ga": "^2.5.3",
+    "react-google-maps": "^9.4.5",
+    "react-i18next": "^7.7.0",
+    "react-observed": "^1.0.2",
+    "react-scroll": "^1.7.10",
+    "react-swipeable": "^4.3.0",
+    "react-yandex-metrika": "^2.4.1",
+    "svg.js": "^2.6.5",
+    "three-full": "^8.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1",
+    "nodemon": "^1.17.5",
+    "sass-lint": "^1.12.1"
+  }
+}

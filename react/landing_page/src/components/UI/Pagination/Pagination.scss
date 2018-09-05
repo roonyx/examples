@@ -1,0 +1,36 @@
+@import '../../../../static/styles/variables';
+
+.wrapper {
+  display: flex;
+
+  &.block {
+    pointer-events: none;
+  }
+
+  .dotWrapper {
+    padding: 5px;
+    background-color: $c-section-bg;
+    border: none;
+    cursor: pointer;
+    outline: none;
+
+    &:focus, &:active {
+      outline: none;
+    }
+
+    &.active {
+      pointer-events: none;
+
+      .dot {
+        background-color: #FFFFFF;
+      }
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #2E3036;
+    }
+  }
+}

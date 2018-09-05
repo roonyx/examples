@@ -1,0 +1,17 @@
+@import '../../../static/styles/variables';
+
+.missionDesktop {
+  display: block;
+  @include full-window();
+  @include media-portrait($size-port-ex-large) {
+    display: none;
+  }
+}
+
+.missionNotDesktop {
+  display: none;
+  @include full-window();
+  @include media-portrait($size-port-ex-large) {
+    display: block;
+  }
+}

@@ -1,0 +1,55 @@
+@import '../../../static/styles/variables';
+
+
+
+.container {
+  @include full-window();
+  position: relative;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+
+  .control-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+
+
+    .scroll-block {
+      width: 11%;
+      height: 100%;
+      right: 0;
+      z-index: 1000;
+      display: inline-block;
+    }
+
+    .center-block {
+      width: 34%;
+    }
+  }
+
+
+  .arrow {
+    bottom: 7vh;
+    position: absolute;
+    right: 10vw;
+  }
+
+  .circles-wrapper {
+    height: 100%;
+    position: relative;
+    width: 400%;
+
+    &.animate {
+      animation: river linear;
+    }
+  }
+}
+
+@keyframes river {
+  from { transform: translateX(0) }
+  to { transform: translateX(-400%) }
+}

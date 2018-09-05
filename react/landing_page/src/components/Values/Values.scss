@@ -1,0 +1,263 @@
+@import '../../../static/styles/variables';
+
+.block-relative {
+  position: relative;
+}
+
+.block-relative-max {
+  position: relative;
+  @include full-window();
+}
+
+.container {
+  @include full-window();
+
+  @include media-portrait($size-port-ex-large) {
+    height: calc(100% - #{$section-title-height});
+  }
+
+  @include media-portrait($size-port-medium) {
+    height: calc(100% - #{$section-title-height-small});
+  }
+}
+
+.logo {
+  color: $c-text;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 50px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  position: absolute;
+  top: -60px;
+  right: 10vw;
+}
+
+.title {
+  color: $c-text;
+  font-size: 100px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  line-height: 100px;
+  margin-bottom: 7.7vh;
+  max-width: 780px;
+  position: absolute;
+  right: 9vw;
+  top: 9vh;
+
+  @include only-full-hd() {
+    left: 22%;
+    right: 0;
+    top: 15vh;
+    margin: auto;
+    font-size: calcSize(120);
+    line-height: calcSize(120);
+    max-width: calcSize(900);
+    letter-spacing: 1px;
+  }
+
+  @include media-portrait($size-port-ex-large) {
+    font-size: 72px;
+    position: relative;
+    right: 0;
+    top: 0;
+    margin: 0 $side-step;
+    line-height: 78px;
+    letter-spacing: -0.7px;
+  }
+
+  @include only-tablet-large() {
+    font-size: 90px;
+  }
+
+  @include media-portrait($size-port-medium) {
+    font-size: 30px;
+    position: relative;
+    right: 0;
+    top: 0;
+    margin: 0 $side-step-small;
+    line-height: normal;
+    letter-spacing: 0;
+  }
+
+  @include media-portrait($size-port-ex-small) {
+    margin: 0 $side-step-small;
+    font-size: 26px;
+    line-height: 22px;
+    padding: 20px 0;
+  }
+
+  @include media-landscape-phones(
+    $size-mob-land-width-medium,
+    $size-mob-land-height-medium
+  ) {
+    font-size: 40px;
+  }
+
+  @include media-landscape-phones(
+    $size-mob-land-width-small,
+    $size-mob-land-height-small
+  ) {
+    font-size: 30px;
+  }
+}
+
+.block-flex {
+  align-items: flex-start;
+  bottom: 15%;
+  display: flex;
+  justify-content: space-around;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  width: calc(100% - 160px);
+
+  @include only-full-hd() {
+    bottom: 10.5%;
+  }
+
+  div:not(.math-sign) {
+    color: $c-text;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 24px;
+    min-width: 120px;
+    padding-top: 22px;
+
+    @include only-full-hd() {
+      font-size: calcSize(18);
+      line-height: calcSize(34);
+      padding-top: calcSize(34);
+    }
+  }
+
+  .math-sign {
+    color: $c-primary;
+    font-size: 50px;
+    font-weight: bold;
+    margin: 0 10px;
+
+    @include only-full-hd() {
+      font-size: calcSize(72);
+    }
+  }
+
+  @include media-portrait($size-port-ex-large) {
+    flex-direction: column;
+    position: relative;
+    bottom: 0;
+    margin: 0 $side-step;
+
+    .math-sign {
+      font-size: 48px;
+      margin: 0;
+    }
+
+    br {
+      display: none;
+    }
+  }
+
+  @include only-tablet() {
+    div:not(.math-sign) {
+      font-size: 26px;
+      padding-top: 0;
+    }
+  }
+
+  @include only-tablet-large() {
+    div:not(.math-sign) {
+      font-size: 50px;
+      line-height: 55px;
+    }
+  }
+
+  @include media-landscape($size-land-large) {
+    left: unset;
+  }
+
+  @include media-portrait($size-port-medium) {
+    flex-direction: column;
+    position: relative;
+    bottom: 0;
+    margin: 0 $side-step-small;
+    width: calc(100% - #{$side-step-small * 2});
+
+    .math-sign {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    div:not(.math-sign) {
+      padding-top: 0;
+    }
+
+    br {
+      display: none;
+    }
+
+  }
+
+
+  @include media-portrait($size-port-ex-small) {
+    margin: 0 $side-step-small;
+
+    div:not(.math-sign) {
+      line-height: 15px;
+      padding: 5px 0;
+    }
+
+    .math-sign {
+      display: none;
+    }
+  }
+
+  @include media-landscape-phones(
+    $size-mob-land-width-medium,
+    $size-mob-land-height-medium
+  ) {
+    position: absolute;
+    font-size: 10px;
+    width: 100%;
+    bottom: 30px;
+    padding: 0 10px;
+
+    div:not(.math-sign) {
+      line-height: 15px;
+      padding-top: 0;
+      font-size: 13px;
+      min-width: auto;
+    }
+
+    .math-sign {
+      font-size: 16px;
+    }
+  }
+}
+
+.icon {
+  display: block;
+  height: 60px;
+  margin: 0 22px 22px;
+  width: 63px;
+
+  @include media-portrait($size-port-medium) {
+    display: none;
+  }
+
+  @include media-portrait($size-port-ex-large) {
+    display: none;
+  }
+
+  @include media-landscape-phones(
+    $size-mob-land-width-medium,
+    $size-mob-land-height-medium
+  ) {
+    display: none;
+  }
+
+  @include media-landscape($size-land-large) {
+    display: none;
+  }
+}

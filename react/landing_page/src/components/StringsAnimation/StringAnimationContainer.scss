@@ -1,0 +1,61 @@
+@import '../../../static/styles/variables';
+
+.containerMission {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0 20px 20px;
+  background-color: $c-section-bg-light;
+  height: 100%;
+  position: relative;
+
+  @include only-full-hd() {
+    height: 95%;
+  }
+
+  .string {
+    overflow: visible;
+    display: block;
+    height: 50px;
+    padding-top: 25px;
+    width: 100%;
+
+    path {
+      fill: transparent;
+      stroke: black;
+      stroke-width: .5;
+    }
+  }
+
+  .svgCircle {
+    overflow: visible;
+  }
+
+  .containerText {
+    width: 820px;
+    margin: 0 auto;
+    height: 20px;
+    font-size: 26px;
+    margin-bottom: 20px;
+    z-index: 2;
+
+    @include only-full-hd() {
+      font-size: calcSize(28);
+      width: calcSize(850);
+    }
+
+    .text {
+      display: block;
+      color: #000;
+    }
+  }
+}
+
+.ru.containerMission .containerText {
+  font-size: 21px;
+
+  @include only-full-hd() {
+    font-size: calcSize(23);
+  }
+}

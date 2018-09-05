@@ -1,0 +1,33 @@
+@import '../../../static/styles/variables';
+
+.member-container {
+  height: 120px;
+  position: absolute;
+
+  .photo {
+    background-color: $c-section-bg-light;
+    border-radius: 50%;
+    display: inline-block;
+    height: 120px;
+    width: 120px;
+  }
+
+  .member-name {
+    color: $c-text-dark;
+    display: inline-block;
+    font-size: 28px;
+    font-weight: 700;
+    left: 20px;
+    line-height: 52px;
+    position: relative;
+    top: -49px;
+    .member-description {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 19px;
+      height: 11px;
+      color: $c-text-dark;
+    }
+  }
+}
+

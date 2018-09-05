@@ -1,0 +1,7 @@
+.idea
+.DS_Store
+.next
+node_modules
+linters
+package-lock.json
+.env

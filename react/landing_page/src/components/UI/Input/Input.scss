@@ -1,0 +1,26 @@
+@import '../../../../static/styles/variables';
+
+.input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: solid 2px #FFFFFF;
+  padding: 10px;
+  transition: border-color .3s ease-in-out;
+  color: $c-text;
+  font-size: 16px;
+  border-radius: 0;
+
+  &:focus {
+    outline: none;
+
+    &::placeholder {
+      color: rgb(70, 70, 70);
+    }
+  }
+
+  &::placeholder {
+    color: $c-text;
+    letter-spacing: 1px;
+  }
+}

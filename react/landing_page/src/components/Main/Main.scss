@@ -1,0 +1,432 @@
+@import '../../../static/styles/variables';
+@import './variables';
+
+.mainBlock {
+  @include full-window();
+  padding: 30px 10px 30px 30px;
+  position: relative;
+
+  @include media-portrait($size-port-ex-large) {
+    height: $port-height;
+    padding-right: 30px;
+    padding-bottom: 0;
+  }
+
+  @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+    height: $port-height;
+    padding-right: 30px;
+  }
+
+  .tiles {
+    @include full-window();
+
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    background-size: cover;
+    align-items: flex-end;
+
+    @include media-portrait($size-port-ex-large) {
+      flex-flow: column;
+    }
+
+    @include media-landscape($size-land-medium) {
+      flex-flow: column;
+    }
+
+    @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+      flex-flow: column;
+    }
+
+    @include only-full-hd() {
+      align-items: flex-end;
+      padding-top: 85px;
+    }
+
+    &.animated {
+      .tile {
+        animation: tile-rotate $animation-time linear;
+
+        @include media-portrait($size-port-ex-large) {
+          animation: tile-rotate-horizontal $animation-time linear;
+        }
+
+        @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+          animation: tile-rotate-horizontal $animation-time linear;
+        }
+
+        .frontShadow, .backShadow {
+          animation: tile-shadow $animation-time ease-in-out;
+        }
+
+        .frontBG, .backBG {
+          animation: tile-bg $animation-time ease-in-out;
+        }
+
+        .left, .top {
+          animation: tile-border $animation-time ease-in-out;
+        }
+      }
+    }
+
+    .tile {
+      width: 100%;
+      height: 86%;
+      margin: 0 5px;
+      position: relative;
+      transform-style: preserve-3d;
+      transform: $tile-transform;
+
+      @include media-portrait($size-port-ex-large) {
+        width: 100%;
+        height: calc(#{$port-height} / #{$tiles-count});
+        margin: 5px 0;
+      }
+
+      @include only-full-hd(){
+        height: 96%;
+      }
+
+      @include media-portrait($size-port-medium) {
+        height: calc(#{$port-height} / #{$tiles-count-mobile});
+
+        &:nth-child(n + #{$tiles-count-mobile + 1}) {
+          // dont use display none;
+          height: 1px;
+          opacity: 0;
+          pointer-events: none;
+          margin: 0;
+        }
+      }
+
+      @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+        width: 100%;
+        height: calc(#{$port-height} / #{$tiles-count-mobile});
+
+        &:nth-child(n + #{$tiles-count-mobile + 1}) {
+          // dont use display none;
+          height: 1px;
+          opacity: 0;
+          pointer-events: none;
+          margin: 0;
+        }
+      }
+
+      &:first-child {
+        margin-left: 0;
+
+        @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+          margin-left: 5px;
+        }
+      }
+
+      &:last-child {
+        margin-right: 0px;
+      }
+
+      @for $i from 2 through $tiles-count {
+        &:nth-child(#{$i}) {
+          .face:not(.side) {
+            background-position-x: -#{9vw * ($i - 1)};
+
+            @include media-portrait($size-port-ex-large) {
+              background-position-x: -50vw;
+              background-position-y: #{($tiles-count - $i) * 9vw};
+            }
+
+            @include media-portrait($size-port-medium) {
+              background-position-y: #{($tiles-count-mobile - $i) * 70px};
+            }
+
+            @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+              background-position-x: unset;
+              background-position-y: #{($tiles-count-mobile - $i) * 70px};
+            }
+          }
+        }
+      }
+
+      .face {
+        width: $tile-face-width;
+        height: 100%;
+        position: absolute;
+
+        &:not(.side):not(.frontBG):not(.backBG) {
+          background-image: url($main-bg-url-strong);
+          background-color: rgba(135, 135, 135, .2);
+          background-blend-mode: difference;
+          filter: brightness(85%);
+        }
+
+        &.side {
+          width: $tile-side-width;
+          background-color: $c-side-bg;
+
+          @include media-portrait($size-port-ex-large) {
+            width: 100%;
+          }
+
+          @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+            width: 100%;
+          }
+        }
+
+        &.front {
+          transform: translateZ(#{$tile-side-width / 2}) rotateY(0deg);
+        }
+
+        &.back {
+          transform: translateZ(-#{$tile-side-width / 2}) rotateY(180deg);
+
+          @include media-portrait($size-port-ex-large) {
+            transform: translateZ(-#{$tile-side-width / 2}) rotateY(180deg) scale(-1);
+          }
+
+          @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+            transform: translateZ(-#{$tile-side-width / 2}) rotateY(180deg) scale(-1);
+          }
+        }
+
+        &.left, &.right {
+          @include media-portrait($size-port-ex-large) {
+            display: none;
+          }
+
+          @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+            display: none;
+          }
+        }
+
+        &.left {
+          left: -#{$tile-side-width / 2};
+          transform: rotateY(90deg);
+        }
+
+        &.right {
+          right: -#{$tile-side-width / 2};
+          transform: rotateY(-90deg);
+        }
+
+        &.top, &.bot {
+          display: none;
+          height: $tile-side-width;
+
+          @include media-portrait($size-port-ex-large) {
+            display: block;
+          }
+
+          @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+            display: block;
+          }
+        }
+
+        &.top {
+          top: -#{$tile-side-width / 2};
+          transform: rotateX(-90deg);
+        }
+
+        &.bot {
+          bottom: -#{$tile-side-width / 2};
+          transform: rotateX(90deg);
+        }
+
+        &.frontBG {
+          transform: translateZ(#{$tile-side-width / 2 + 1}) rotateY(0deg);
+          background-color: $c-purple;
+          opacity: 0;
+        }
+
+        &.backBG {
+          transform: translateZ(-#{$tile-side-width / 2 + 1}) rotateY(180deg);
+          background-color: $c-purple;
+          opacity: 0;
+        }
+      }
+
+      .frontShadow { transform: translateZ(#{$tile-side-width / 2}) }
+      .backShadow { transform: translateZ(-#{$tile-side-width / 2}) }
+      .frontShadow, .backShadow {
+        width: $shadow-width;
+        height: 100%;
+        position: absolute;
+        left: -#{$shadow-width / 2};
+        filter: blur(4px);
+
+        @include media-portrait($size-port-ex-large) {
+          width: 100%;
+          height: $shadow-width;
+          top: -#{$shadow-width / 2};
+          left: 0;
+        }
+
+        @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+          width: 100%;
+          height: $shadow-width;
+          top: -#{$shadow-width / 2};
+          left: 0
+        }
+      }
+    }
+  }
+}
+
+.content {
+  padding-top: 25.5vh;
+  padding-left: 11vw;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  pointer-events: none;
+
+  @include only-full-hd() {
+    padding-top: 25.5vh;
+  }
+
+  @media all and (orientation: portrait) {
+    @media (max-width: $size-port-ex-large) {
+      padding-top: 16.5vh;
+      padding-left: 30px;
+    }
+
+    @media (max-width: $size-port-large) {
+      padding-top: 18vh;
+    }
+
+    @media (max-width: $size-port-medium) {
+      padding-top: 150px;
+      padding-left: 15px;
+    }
+
+    @media (max-width: $size-port-small) {
+      padding-top: 90px;
+    }
+  }
+
+  @media all and (orientation: landscape) and (max-width: $size-land-medium) {
+    padding-top: 80px;
+    padding-left: 15px;
+  }
+
+  @media all and (orientation: landscape) {
+    @media (max-width: $size-mob-land-width-medium) and (max-height: $size-mob-land-height-medium) {
+      padding-top: 40px;
+    }
+
+    @media (max-width: $size-mob-land-width-small) and (max-height: $size-mob-land-height-small) {
+      padding-top: 30px;
+    }
+  }
+
+  .title {
+    font-size: 94px;
+    letter-spacing: 4px;
+    line-height: 100px;
+    color: $c-text;
+    margin-bottom: 7.7vh;
+
+    @include only-full-hd() {
+      font-size: calcSize(114);
+      line-height: calcSize(114);
+    }
+
+    @media all and (orientation: portrait) {
+      @media (max-width: $size-port-large) {
+        font-size: 90px;
+        line-height: 100px;
+      }
+
+      @media (max-width: $size-port-medium) {
+        font-size: 34px;
+        line-height: 54px;
+        letter-spacing: 0px;
+      }
+
+      @media (max-width: $size-port-small) {
+        font-size: 30px;
+        line-height: 48px;
+      }
+
+      @media (max-width: $size-port-ex-small) {
+        font-size: 24px;
+        line-height: 36px;
+      }
+    }
+
+    @media all and (orientation: landscape) {
+      @media (min-width: 1650px) {
+        font-size: 114px;
+        line-height: 126px;
+      }
+
+      @media (max-width: $size-land-large) {
+        font-size: 92px;
+        line-height: 98px;
+      }
+
+      @media (max-width: $size-land-large) {
+        font-size: 66px;
+        line-height: 76px;
+      }
+
+      @media (max-width: $size-land-medium) {
+        font-size: 30px;
+        line-height: 42px;
+      }
+
+      @media (max-width: $size-mob-land-width-medium) and (max-height: $size-mob-land-height-medium) {
+        font-size: 34px;
+        line-height: 46px;
+      }
+
+      @media (max-width: $size-mob-land-width-small) and (max-height: $size-mob-land-height-small) {
+        font-size: 26px;
+        line-height: 36px;
+      }
+    }
+  }
+}
+
+.lineWrapper {
+  height: 15%;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  display: none;
+
+  @media all and (orientation: portrait) and (max-width: $size-port-ex-large) {
+    display: flex;
+  }
+
+  @media all and (orientation: landscape)
+  and (max-width: $size-mob-land-width-medium) and (max-height: $size-mob-land-height-medium) {
+    display: flex;
+    height: 20%;
+  }
+
+  .line {
+    width: 4px;
+    background-color: $c-text;
+    animation: line-animation 1.2s infinite;
+  }
+}
+
+.btn {
+  pointer-events: all;
+
+  @media all and (orientation: portrait) {
+    @media (max-width: $size-port-ex-large) {
+      margin-left: 6px;
+      padding: 20px 30px;
+      height: 55px;
+    }
+
+    @media (max-width: $size-port-medium) {
+      display: none;
+    }
+  }
+
+  @media all and (orientation: landscape) and (max-width: $size-land-medium) {
+    display: none;
+  }
+}

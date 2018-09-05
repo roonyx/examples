@@ -1,0 +1,121 @@
+@import 'global';
+@import '_variables';
+
+.window {
+  width: 100%;
+  height: 100vh;
+  overflow-y: hidden;
+  position: fixed;
+
+  .mainWrapper {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100%;
+  }
+}
+
+%section, .section {
+  width: 100%;
+  height: 100vh;
+  padding-top: 105px;
+  padding-right: $sidebar-width;
+  background-color: $c-section-bg;
+  overflow: hidden;
+
+  @include media-landscape($size-land-medium) {
+    width: 100%;
+    padding-top: 0;
+    padding-right: 0;
+  }
+
+  @include media-portrait($size-port-ex-large) {
+    width: 100%;
+    padding-top: $sidebar-height-port-large;
+    padding-right: 0;
+  }
+
+  @include media-portrait($size-port-medium) {
+    padding-bottom: 75px;
+  }
+
+  @include media-portrait($size-port-small) {
+    padding-top: $sidebar-height-port-small;
+  }
+
+  @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+    padding-top: $sidebar-height-land-small;
+
+    &.ptn  {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  &.light {
+    background-color: $c-bg-light;
+  }
+}
+
+.ptn  {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.sectionContact {
+  min-height: 600px;
+}
+
+.section-fullsize-background {
+  @extend %section;
+  background-image: url($main-bg-url);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @include media-landscape($size-land-medium) {
+    width: 100%;
+    padding-top: 0;
+    padding-right: 0;
+  }
+
+  @include media-portrait($size-port-ex-large) {
+    width: 100%;
+    padding-top: $sidebar-height-port-large;
+    padding-right: 0;
+
+    &.ptn  {
+      padding-top: 0;
+    }
+  }
+
+  @include media-portrait($size-port-small) {
+    padding-top: $sidebar-height-port-small;
+  }
+
+  @include media-landscape-phones($size-mob-land-width-medium, $size-mob-land-height-medium) {
+    padding-top: $sidebar-height-land-small;
+  }
+
+  &.strongBg {
+    background-image: url($main-bg-url-strong);
+  }
+}
+
+.feedbackPage {
+  width: 100%;
+  height: 100vh;
+  overflow-y: hidden;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  background-image: url(/static/images/background-values.jpg);
+
+  p {
+    padding-bottom: 10px;
+    color: white;
+    font-size: 18px;
+  }
+}

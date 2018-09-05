@@ -1,0 +1,73 @@
+@import '../../../static/styles/variables';
+
+.head {
+  width: calc(100% - #{$sidebar-width});
+  height: 105px;
+  padding: 60px 100px 20px 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media all and (orientation: portrait) and (max-width: $size-port-ex-large) {
+    display: none;
+  }
+
+  @media all and (orientation: landscape) and (max-width: $size-land-medium) {
+    display: none;
+  }
+
+  .logo {
+    width: 150px;
+
+    @include only-full-hd() {
+      width: 205px;
+    }
+
+    &.dark {
+      color: $c-text-dark;
+    }
+  }
+
+  .back {
+    margin-left: auto;
+    padding-right: 12px;
+  }
+
+  .title {
+    color: $c-text;
+    text-transform: uppercase;
+    letter-spacing: 4.74px;
+
+    &.dark {
+      color: $c-text-dark;
+
+      .btn {
+        color: $c-text-dark;
+      }
+    }
+
+    .btn {
+      font-size: 14px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      color: $c-text;
+      text-transform: uppercase;
+      letter-spacing: 4.74px;
+      font-weight: bold;
+
+
+      @include only-full-hd() {
+        font-size: calcSize(14);
+      }
+
+      &:focus, &:active {
+        outline: none;
+      }
+    }
+  }
+}

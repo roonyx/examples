@@ -1,0 +1,42 @@
+@import '../../../../static/styles/variables';
+
+@mixin primary {
+  background-color: $c-primary;
+  color: $c-text;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 30px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  height: 50px;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: all .1s ease-in;
+
+  @include only-full-hd() {
+    font-size: calcSize(14);
+    padding: calcSize(15) calcSize(35);
+    width: 245px;
+    height: 50px;
+  }
+
+  &:hover, &:focus {
+    @include primary;
+  }
+
+  &.primary {
+    @include primary;
+  }
+
+  &.dark {
+    background-color: $c-section-bg;
+    color: $c-text;
+  }
+}
