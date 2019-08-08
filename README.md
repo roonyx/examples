@@ -20,6 +20,11 @@ and interaction with an API.
 [Code Examples using React](/react)
 
 
+## Angular
+Angular is a development platform for building mobile and desktop web applications using 
+Typescript/JavaScript and other languages.
+
+
 ## Ruby on Rails
 
 **Ruby on Rails**, or **Rails**, is a server-side web application framework written in Ruby under
