@@ -1,0 +1,73 @@
+<div class="table-container">
+  <table [hidden]="!data"
+         class="table table-bordered"
+         #table>
+    <thead>
+      <th>
+        <ng-container [ngSwitch]="view">
+          <span *ngSwitchCase="'users'">Staff member</span>
+          <span *ngSwitchCase="'shifts'">Shift time</span>
+        </ng-container>
+      </th>
+      <th *ngFor="let date of data?.dates">
+        {{ date | date: 'MMM d' }}
+      </th>
+    </thead>
+    <tbody *ngIf="view == 'users'">
+      <tr *ngFor="let user of data?.users"
+          [ngStyle]="departmentStyle(user.department)">
+        <td (click)="updateUser(user.id)" [ngStyle]="departmentStyle(user.department)">
+          <div class="user-avatar" *ngIf="user?.avatarUrl"><img [src]="user?.avatarUrl"></div>
+          <div class="title">{{ user.name }}</div>
+          <div class="description">
+            {{ user.department?.name }}
+          </div>
+          <div class="helper">{{ user.jobTitle }}</div>
+        </td>
+        <td *ngFor="let date of data?.dates"
+            (click)="editRosterShift(date, user)">
+          <ng-container *ngIf="data.rostersByUsers[user.id] && data.rostersByUsers[user.id][date] as roster">
+            <div *ngIf="roster.kind == 'workday'">
+              <div class="title">{{ roster.shiftTime.name }}</div>
+              <div class="description">
+                {{ roster.shiftTime.start | date:'HH:mm':'GMT' }} -
+                {{ roster.shiftTime.finish | date:'HH:mm':'GMT' }}
+              </div>
+              <div class="helper">
+                {{ roster.facilityName }}
+              </div>
+            </div>
+            <div class="title" *ngIf="roster.kind !== 'workday'">
+              {{ roster.kind }}
+            </div>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+    <tbody class="shifts" *ngIf="view === 'shifts'">
+      <ng-container *ngFor="let department of data?.departments">
+        <tr *ngFor="let shiftTime of department.shiftTimes"
+            [ngStyle]="departmentStyle(department)">
+          <td [ngStyle]="departmentStyle(department)">
+            <div class="title">{{ shiftTime.name }}</div>
+            <div class="description">
+              {{ shiftTime.start | date:'HH:mm':'GMT' }} -
+              {{ shiftTime.finish | date:'HH:mm':'GMT' }}
+            </div>
+            <div class="helper">{{ department.name }}</div>
+          </td>
+          <td *ngFor="let date of data?.dates"
+              (click)="editRosterUser(date, shiftTime)">
+            <ng-container *ngIf="data.rostersByShifts[shiftTime.id] && data.rostersByShifts[shiftTime.id][date] as roster">
+              <div *ngIf="findUserBy(roster.userId) as user">
+                <div class="user-avatar" *ngIf="user?.avatarUrl"><img [src]="user?.avatarUrl"></div>
+                <div class="title">{{ user.name }}</div>
+                <div class="description">{{ user.jobTitle }}</div>
+              </div>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
