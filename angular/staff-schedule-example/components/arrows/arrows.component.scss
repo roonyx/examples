@@ -1,0 +1,32 @@
+.arrows {
+  display: flex;
+  justify-content: space-between;
+  width: 70px;
+  padding: 16px 0;
+
+  .arrow {
+    border: none;
+    width: 7px;
+    height: 11px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    outline: none;
+  }
+
+  .back-few {
+    background-image: url(/assets/icons/back-few-icon.svg);
+  }
+
+  .back {
+    background-image: url(/assets/icons/back-icon.svg);
+  }
+
+  .forward {
+    background-image: url(/assets/icons/forward-icon.svg);
+  }
+
+  .forward-few {
+    background-image: url(/assets/icons/forward-few-icon.svg);
+  }
+}

@@ -1,0 +1,124 @@
+<div class="header">
+  <p class="name">New Roster</p>
+  <div class="actions">
+    <button class="btn" (click)="closeModal()"></button>
+  </div>
+</div>
+
+<div class="form-wrapper">
+  <form [formGroup]="form" class="form place-add" [appUpdatePermissions]="permission">
+    <div [hidden]="view !== null">
+      <div class="form-row flex">
+        <label for="date">Date</label>
+        <div class="datepicker">
+          <input class="form-control"
+                 bsDatepicker
+                 [class.invalid]="errors?.date?.length"
+                 name="date"
+                 [appDisableControl]="isDisabled()"
+                 id="date"
+                 autocomplete="off"
+                 formControlName="date"
+                 [bsConfig]="bsConfig">
+          <i class="calendar"></i>
+        </div>
+        <small id="dateHelp" class="form-text text-danger" *ngFor="let error of errors?.date">
+          {{ error }}
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group" [hidden]="view === 'shifts'">
+      <label for="rosterType">Roster Type</label>
+      <select class="form-control"
+              name="rosterType"
+              id="rosterType"
+              formControlName="kind"
+              placeholder="Kind">
+        <option *ngFor="let kind of rosterTypes"
+                [value]="kind.key">{{ kind.value }}</option>
+      </select>
+    </div>
+
+    <div [hidden]="form.get('kind').value !== 'workday'">
+      <div class="form-group" [hidden]="view === 'users'">
+        <label for="userId">User</label>
+        <select class="form-control"
+                name="userId"
+                id="userId"
+                [class.invalid]="errors?.userId?.length"
+                formControlName="userId"
+                [appDisableControl]="isDisabled()"
+                placeholder="User">
+          <option *ngFor="let user of users"
+                  [value]="user.id"
+                  [disabled]="!isUserAvailable(user)">{{ user.name }}</option>
+        </select>
+        <small id="userIdHelp" class="form-text text-danger" *ngFor="let error of errors?.userId">
+          {{ error }}
+        </small>
+      </div>
+
+      <div class="form-group" [hidden]="view == 'shifts'">
+        <label for="shiftTimeId">Shift Time</label>
+        <select class="form-control"
+                name="shiftTimeId"
+                id="shiftTimeId"
+                [class.invalid]="errors?.shiftTime?.length"
+                formControlName="shiftTimeId"
+                placeholder="Shift Time">
+          <optgroup *ngFor="let department of departments"
+                    [label]="department.name">
+            <option *ngFor="let shift of department.shiftTimes"
+                    [value]="shift.id"
+                    [disabled]="!isShiftAvailable(shift)">
+              {{ shift.start | date:'HH:mm':'GMT' }} -
+              {{ shift.finish | date:'HH:mm':'GMT' }}
+              {{ shift.name }}
+            </option>
+          </optgroup>
+        </select>
+        <small id="shiftTimeHelp" class="form-text text-danger"
+               *ngFor="let error of errors?.shiftTime">
+          {{ error }}
+        </small>
+      </div>
+      <div class="form-group" *ngIf="facilities && facilities.length > 1">
+        <label for="facilityId">Facility</label>
+        <select class="form-control"
+                name="facilityId"
+                id="facilityId"
+                [appDisableControl]="form.get('kind').value !== 'workday'"
+                [class.invalid]="errors?.facilityId?.length"
+                formControlName="facilityId"
+                placeholder="Facility">
+          <option *ngFor="let facility of facilities"
+                  [value]="facility.id">{{ facility.name }}</option>
+        </select>
+        <small id="facilityIdHelp"
+               class="form-text text-danger"
+               *ngFor="let error of errors?.facilityId">
+          {{ error }}
+        </small>
+      </div>
+    </div>
+  </form>
+  <div class="form-buttons">
+    <app-button btnStyle="narrDanger"
+                *appHasPermissions="'Roster:delete'"
+                [disabled]="!roster.id"
+                (click)="removeConfirm()">
+      Delete
+    </app-button>
+    <app-button class="cancelButton"
+                btnStyle="narrCancel"
+                (click)="closeModal()">
+      Cancel
+    </app-button>
+    <app-button btnStyle="narrPrimary"
+                [disabled]="isDisabled()"
+                (click)="sendData()">
+      Save
+    </app-button>
+  </div>
+</div>

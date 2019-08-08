@@ -1,0 +1,137 @@
+@import 'variables';
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header {
+  position: relative;
+  background-color: $header-staff-bg;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: $white;
+
+  .name {
+    margin: 0;
+    text-align: center;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 10px 0;
+    min-height: 34px;
+  }
+
+  .actions {
+    position: absolute;
+    top: 0;
+    right: 13px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-bottom: 0;
+
+    .btn {
+      background: url(/assets/icons/close-icon.svg) center;
+      width: 10px;
+      height: 10px;
+      display: block;
+      padding: 0;
+    }
+  }
+}
+
+.form-wrapper {
+  padding: 20px;
+
+  .place-add {
+    max-width: 400px;
+    font-family: $font-roboto;
+    position: relative;
+
+    .form-row {
+      margin: 0 0 10px 0;
+
+      .datepicker {
+        position: relative;
+
+        input {
+          max-width: 170px;
+          width: 170px;
+          height: 36px;
+          padding: 5px 10px;
+        }
+
+        .calendar {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 15px;
+          pointer-events: none;
+          margin: auto;
+          width: 14px;
+          height: 14px;
+          background-image: url(/assets/icons/calendar-icon-dark.svg);
+        }
+      }
+
+      .btn-add {
+        margin-right: 10px;
+      }
+
+      label {
+        font-size: 14px;
+        margin-bottom: 2px;
+      }
+
+      select {
+        width: 170px;
+        min-width: 170px;
+        border-radius: 4px;
+        height: 36px;
+        padding: 5px;
+      }
+
+      .checkbox-label {
+        width: 85px;
+
+        app-checkbox {
+
+          .check-box {
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+
+      label {
+        font-size: 14px;
+        margin-bottom: 2px;
+        color: $text-regular;
+      }
+
+      input, select {
+        padding: 5px 10px;
+        height: 36px;
+        color: $text-regular;
+        border-color: $input-border-color-regular;
+        margin-bottom: 0;
+      }
+
+      .invalid {
+        border-color: $invalid-action;
+      }
+
+      .add-type-group {
+        display: flex;
+        position: relative;
+
+        app-button {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+}
