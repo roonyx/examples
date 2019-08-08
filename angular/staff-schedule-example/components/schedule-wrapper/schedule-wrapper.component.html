@@ -5,11 +5,14 @@
       <app-button btnStyle="primary"
                   btnIcon="add-icon-white"
                   (click)="addNewRoster()">
-        Add New Roster</app-button>
+        Add New Roster
+      </app-button>
       <app-button btnStyle="primary"
                   btnIcon="add-icon-white"
                   (click)="addNewStaffMember()"
-                  *appHasPermissions="'User:create'">Add New Staff Member</app-button>
+                  *appHasPermissions="'User:create'">
+        Add New Staff Member
+      </app-button>
     </div>
   </div>
   <div class="dashboard-panel">
@@ -53,7 +56,7 @@
       <app-range-date-picker (dateRangeOutput)="receiveDateRange($event)"
                              class="date-picker">
       </app-range-date-picker>
-      <div class="vertical"></div>
+      <div class="vertical-separator"></div>
       <app-search-box placeText="Search by Name"
                       (changed)="filterResidentsByName($event)"></app-search-box>
     </div>

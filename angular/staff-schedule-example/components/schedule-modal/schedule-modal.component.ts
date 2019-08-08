@@ -57,6 +57,10 @@ export class ScheduleModalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.buildForm();
+  }
+
+  private buildForm(): void {
     this.form = this.fb.group({
       id: [this.roster.id],
       date: [this.roster.date || this.date || new Date()],
@@ -147,10 +151,9 @@ export class ScheduleModalComponent implements OnInit {
 
   public extractDate(): string {
     const date = this.form.get('date').value;
-    if (typeof date !== 'string') {
-      return moment(date).format('YYYY-MM-DD');
+    if (date) {
+      return date;
     }
-    return date;
   }
 
   public isUserAvailable(user: User): boolean {

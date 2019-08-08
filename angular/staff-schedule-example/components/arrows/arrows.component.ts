@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Period } from '@models';
 import * as moment from 'moment';
+import { DateFormat } from '@consts';
 
 @Component({
   selector: 'app-arrows',
@@ -63,22 +64,22 @@ export class ArrowsComponent {
   private increaseRange(duration: moment.Duration): void {
     this.dateRange.startDate = moment(this.dateRange.startDate)
       .add(duration, 'ms')
-      .format('YYYY-MM-DD')
+      .format(DateFormat)
       .toString();
     this.dateRange.endDate = moment(this.dateRange.endDate)
       .add(duration, 'ms')
-      .format('YYYY-MM-DD')
+      .format(DateFormat)
       .toString();
   }
 
   private decreaseRange(duration: moment.Duration): void {
     this.dateRange.startDate = moment(this.dateRange.startDate)
       .subtract(duration, 'ms')
-      .format('YYYY-MM-DD')
+      .format(DateFormat)
       .toString();
     this.dateRange.endDate = moment(this.dateRange.endDate)
       .subtract(duration, 'ms')
-      .format('YYYY-MM-DD')
+      .format(DateFormat)
       .toString();
   }
 }

@@ -95,7 +95,9 @@
           <option *ngFor="let facility of facilities"
                   [value]="facility.id">{{ facility.name }}</option>
         </select>
-        <small id="facilityIdHelp" class="form-text text-danger" *ngFor="let error of errors?.facilityId">
+        <small id="facilityIdHelp"
+               class="form-text text-danger"
+               *ngFor="let error of errors?.facilityId">
           {{ error }}
         </small>
       </div>
@@ -105,12 +107,18 @@
     <app-button btnStyle="narrDanger"
                 *appHasPermissions="'Roster:delete'"
                 [disabled]="!roster.id"
-                (click)="removeConfirm()">Delete</app-button>
+                (click)="removeConfirm()">
+      Delete
+    </app-button>
     <app-button class="cancelButton"
                 btnStyle="narrCancel"
-                (click)="closeModal()">Cancel</app-button>
+                (click)="closeModal()">
+      Cancel
+    </app-button>
     <app-button btnStyle="narrPrimary"
                 [disabled]="isDisabled()"
-                (click)="sendData()">Save</app-button>
+                (click)="sendData()">
+      Save
+    </app-button>
   </div>
 </div>

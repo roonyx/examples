@@ -102,10 +102,10 @@
     }
   }
 
-  .vertical {
+  .vertical-separator {
     margin: 0 15px;
     height: 42px;
-    width: 0px;
+    width: 0;
     border-right: 1px solid $input-border-color-regular;
   }
 }
@@ -124,7 +124,7 @@
       font-size: 14px;
     }
 
-    .vertical {
+    .vertical-separator {
       margin: 0 8px;
     }
   }

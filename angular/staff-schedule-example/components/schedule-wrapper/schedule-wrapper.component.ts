@@ -37,8 +37,7 @@ import { BsModalRef } from 'ngx-bootstrap';
 })
 export class ScheduleWrapperComponent implements OnInit {
 
-  @ViewChild(ScheduleModalComponent) private send: ScheduleModalComponent;
-  @ViewChild(ScheduleModalComponent) private delete: ScheduleModalComponent;
+  @ViewChild(ScheduleModalComponent) private sendRosterData: ScheduleModalComponent;
   @ViewChild(RangeDatePickerComponent) private datepicker: RangeDatePickerComponent;
   @ViewChild(ScheduleComponent) public dashboard: ScheduleComponent;
 
@@ -98,7 +97,7 @@ export class ScheduleWrapperComponent implements OnInit {
   }
 
   public sendData(): void {
-    this.send.sendData();
+    this.sendRosterData.sendData();
   }
 
   private getCurrentUser(): void {
