@@ -8,4 +8,5 @@ Filters:
   by facility that staff belong to;
   by dates - can be chosen any period, you can list by click at arrows.
 Search by staff name is available.
+
 Schedule by chosen dates can be export to CSV.
